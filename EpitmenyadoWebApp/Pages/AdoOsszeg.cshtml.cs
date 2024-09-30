@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 public class AdoOsszegModel : PageModel
 {
     private readonly EpitmenyadoWebApp.Models.EpitmenyDbContext _context;
-
+    
     public AdoOsszegModel(EpitmenyadoWebApp.Models.EpitmenyDbContext context)
     {
         _context = context;
