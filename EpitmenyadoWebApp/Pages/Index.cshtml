@@ -1,10 +1,60 @@
 ﻿@page
-@model IndexModel
+@model EpitmenyadoWebApp.Pages.IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].AdoSzam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].UtcaNev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].HazSzam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].Sav)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].AlapTerulet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Telkek) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdoSzam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UtcaNev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HazSzam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sav)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlapTerulet)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

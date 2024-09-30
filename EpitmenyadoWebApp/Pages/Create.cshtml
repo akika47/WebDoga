@@ -1,0 +1,54 @@
+﻿@page
+@model EpitmenyadoWebApp.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Telkek</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Telkek.AdoSzam" class="control-label"></label>
+                <input asp-for="Telkek.AdoSzam" class="form-control" />
+                <span asp-validation-for="Telkek.AdoSzam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telkek.UtcaNev" class="control-label"></label>
+                <input asp-for="Telkek.UtcaNev" class="form-control" />
+                <span asp-validation-for="Telkek.UtcaNev" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telkek.HazSzam" class="control-label"></label>
+                <input asp-for="Telkek.HazSzam" class="form-control" />
+                <span asp-validation-for="Telkek.HazSzam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telkek.Sav" class="control-label"></label>
+                <input asp-for="Telkek.Sav" class="form-control" />
+                <span asp-validation-for="Telkek.Sav" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telkek.AlapTerulet" class="control-label"></label>
+                <input asp-for="Telkek.AlapTerulet" class="form-control" />
+                <span asp-validation-for="Telkek.AlapTerulet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
