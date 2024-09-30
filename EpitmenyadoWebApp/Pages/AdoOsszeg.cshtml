@@ -1,5 +1,5 @@
 ﻿@page
-@model EpitmenyadoWebApp.Pages.AdoOsszegModel
+@model AdoOsszegModel
 
 @{
     ViewData["Title"] = "AdoOsszeg";
@@ -10,22 +10,29 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Telkek[0].AdoSzam)
             </th>
+            <th>
+                Total Tax
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Telkek) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdoSzam)
-            </td>
-
-        </tr>
-}
+        @foreach (var item in Model.TotalTaxes)
+        {
+            <tr>
+                <td>
+                    @item.Key
+                </td>
+                <td>
+                    @item.Value.ToString("N0")
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
