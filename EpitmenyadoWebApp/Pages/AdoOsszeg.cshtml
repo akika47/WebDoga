@@ -1,0 +1,31 @@
+﻿@page
+@model EpitmenyadoWebApp.Pages.AdoOsszegModel
+
+@{
+    ViewData["Title"] = "AdoOsszeg";
+}
+
+<h1>AdoOsszeg</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Telkek[0].AdoSzam)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Telkek) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdoSzam)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
