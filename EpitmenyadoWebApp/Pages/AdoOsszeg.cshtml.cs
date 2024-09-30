@@ -13,35 +13,44 @@ public class AdoOsszegModel : PageModel
 
     public IList<Telkek> Telkek { get; set; } = default!;
     public Dictionary<int, int> TotalTaxes { get; set; } = new Dictionary<int, int>();
-
     public async Task OnGetAsync()
     {
-        Telkek = await _context.Telkeks.ToListAsync();
-        var adoszamok = Telkek.GroupBy(x => x.AdoSzam).ToArray();
-        foreach (var item in adoszamok)
-        {
-            int savAdo = 0;
-            var sav = Telkek.Where(x => x.AdoSzam == item.Key).Select(x => x.Sav);
+        var telkeks = await _context.Telkeks.ToListAsync();
+        var personTaxes = new Dictionary<int, int>();
+        var persons = telkeks.GroupBy(x => x.AdoSzam).ToArray();
 
-            if (sav.All(x => x == 'A'))
+        foreach (var person in persons)
+        {
+            int totalTax = 0;
+
+            var savGroups = person.GroupBy(x => x.Sav).ToArray();
+
+            foreach (var sav in savGroups)
             {
-                savAdo = 800;
+                int savAdo = 0;
+                switch (sav.Key)
+                {
+                    case 'A':
+                        savAdo = 800;
+                        break;
+                    case 'B':
+                        savAdo = 600;
+                        break;
+                    case 'C':
+                        savAdo = 100;
+                        break;
+                }
+
+                var alapterulet = sav.Sum(x => x.AlapTerulet);
+                totalTax += alapterulet * savAdo;
             }
-            else if (sav.All(x => x == 'B'))
+
+            if (totalTax >= 10000)
             {
-                savAdo = 600;
+                personTaxes.Add(person.Key, totalTax);
             }
-            else if (sav.All(x => x == 'C'))
-            {
-                savAdo = 100;
-            }
-            int adoOsszeg = Convert.ToInt32(Telkek.Where(x => x.AdoSzam == item.Key).Sum(x => x.AlapTerulet)) * savAdo;
-            if (adoOsszeg < 10000)
-            {
-                adoOsszeg = 0;
-                continue;
-            }
-            TotalTaxes.Add(item.Key, adoOsszeg);
         }
+
+        TotalTaxes = personTaxes;
     }
 }
