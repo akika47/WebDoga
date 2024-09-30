@@ -22,6 +22,7 @@ public class AdoOsszegModel : PageModel
         {
             int savAdo = 0;
             var sav = Telkek.Where(x => x.AdoSzam == item.Key).Select(x => x.Sav);
+
             if (sav.All(x => x == 'A'))
             {
                 savAdo = 800;
@@ -38,6 +39,7 @@ public class AdoOsszegModel : PageModel
             if (adoOsszeg < 10000)
             {
                 adoOsszeg = 0;
+                continue;
             }
             TotalTaxes.Add(item.Key, adoOsszeg);
         }
